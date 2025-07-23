@@ -1,5 +1,5 @@
 {
-    "name": "theiconic/name-parser",
+    "name": "lendable/name-parser",
     "description": "PHP library for parsing a string containing a full name into its parts",
     "type": "library",
     "license": "MIT",
