@@ -24,6 +24,7 @@ class English implements LanguageInterface
         'dvm' => 'DVM',
         'esq' => 'Esq',
         'jr' => 'Jr',
+        'jnr' => 'Jnr',
         'junior' => 'Junior',
         'ma' => 'MA',
         'md' => 'MD',
@@ -32,6 +33,7 @@ class English implements LanguageInterface
         'rph' => 'RPh',
         'senior' => 'Senior',
         'sr' => 'Sr',
+        'snr' => 'Snr',
     ];
 
     const SALUTATIONS = [
