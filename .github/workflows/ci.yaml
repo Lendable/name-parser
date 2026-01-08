@@ -1,0 +1,54 @@
+name: "CI"
+
+concurrency:
+  group: "ci-${{ github.head_ref || github.run_id }}"
+  cancel-in-progress: true
+
+on:
+  merge_group:
+  pull_request:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  ci:
+    name: "Execute (PHP ${{ matrix.php-version }} with ${{ matrix.dependencies }} deps)"
+    runs-on: "ubuntu-latest"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        dependencies:
+          - "lowest"
+          - "highest"
+          - "locked"
+        php-version:
+          - "7.1"
+          - "7.2"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683" # v4
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@0f7f1d08e3e32076e51cae65eb0b0c871405b16e" # v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          ini-values: memory_limit=-1
+
+      - name: "Update Composer platform version"
+        if: ${{ matrix.dependencies != 'locked' && matrix.php-version != '7.1' }}
+        shell: bash
+        run: "composer config platform.php ${{ matrix.php-version }}"
+
+      - name: "Install dependencies"
+        uses: "ramsey/composer-install@v3"
+        with:
+          dependency-versions: "${{ matrix.dependencies }}"
+
+      - name: "Validate Composer dependencies"
+        run: "composer validate"
+
+      - name: "Tests"
+        run: "vendor/bin/phpunit"
