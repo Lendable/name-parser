@@ -1,15 +1,18 @@
 <?php
 
-namespace TheIconic\NameParser\Part;
+declare(strict_types=1);
+
+namespace Tests\TheIconic\NameParser\Part;
 
 use PHPUnit\Framework\TestCase;
+use TheIconic\NameParser\Part\AbstractPart;
 
 class AbstractPartTest extends TestCase
 {
     /**
      * make sure the placeholder normalize() method returns the original value
      */
-    public function testNormalize()
+    public function testNormalize(): void
     {
         $part = $this->getMockForAbstractClass(AbstractPart::class, ['abc']);
         $this->assertEquals('abc', $part->normalize());
@@ -18,7 +21,7 @@ class AbstractPartTest extends TestCase
     /**
      * make sure we unwrap any parts during setValue() calls
      */
-    public function testSetValueUnwraps()
+    public function testSetValueUnwraps(): void
     {
         $part = $this->getMockForAbstractClass(AbstractPart::class, ['abc']);
         $this->assertEquals('abc', $part->getValue());

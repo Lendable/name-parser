@@ -1,18 +1,20 @@
 <?php
 
-namespace TheIconic\NameParser\Mapper;
+declare(strict_types=1);
 
-use TheIconic\NameParser\Part\Salutation;
+namespace Tests\TheIconic\NameParser\Mapper;
+
+use TheIconic\NameParser\Mapper\MiddlenameMapper;
 use TheIconic\NameParser\Part\Firstname;
-use TheIconic\NameParser\Part\Middlename;
 use TheIconic\NameParser\Part\Lastname;
+use TheIconic\NameParser\Part\Middlename;
 
-class MiddlenameMapperTest extends AbstractMapperTest
+class MiddlenameMapperTest extends MapperSpec
 {
     /**
      * @return array
      */
-    public function provider()
+    public static function provider()
     {
         return [
             [
@@ -87,7 +89,7 @@ class MiddlenameMapperTest extends AbstractMapperTest
                     new Middlename('Tiberius'),
                 ],
                 'arguments' => [
-                    true
+                    true,
                 ],
             ],
         ];

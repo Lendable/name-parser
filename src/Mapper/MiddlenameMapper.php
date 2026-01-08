@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TheIconic\NameParser\Mapper;
 
 use TheIconic\NameParser\Part\AbstractPart;
@@ -27,13 +29,13 @@ class MiddlenameMapper extends AbstractMapper
         // If we don't expect a lastname, match a mimimum of 2 parts
         $minumumParts = ($this->mapWithoutLastname ? 2 : 3);
 
-        if (count($parts) < $minumumParts) {
+        if (\count($parts) < $minumumParts) {
             return $parts;
         }
 
         $start = $this->findFirstMapped(Firstname::class, $parts);
 
-        if (false === $start) {
+        if ($start === false) {
             return $parts;
         }
 
@@ -41,15 +43,13 @@ class MiddlenameMapper extends AbstractMapper
     }
 
     /**
-     * @param $start
-     * @param $parts
      * @return mixed
      */
     protected function mapFrom($start, $parts): array
     {
         // If we don't expect a lastname, include the last part,
         // otherwise skip the last (-1) because it should be a lastname
-        $length = count($parts) - ($this->mapWithoutLastname ? 0 : 1);
+        $length = \count($parts) - ($this->mapWithoutLastname ? 0 : 1);
 
         for ($k = $start; $k < $length; $k++) {
             $part = $parts[$k];

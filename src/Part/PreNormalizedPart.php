@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TheIconic\NameParser\Part;
 
 abstract class PreNormalizedPart extends AbstractPart
@@ -16,9 +18,8 @@ abstract class PreNormalizedPart extends AbstractPart
     /**
      * if this is a lastname prefix, look up normalized version from registry
      * otherwise camelcase the lastname
-     *
-     * @return string
      */
+    #[\Override]
     public function normalize(): string
     {
         return $this->normalized;

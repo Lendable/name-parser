@@ -24,8 +24,9 @@ jobs:
           - "highest"
           - "locked"
         php-version:
-          - "7.1"
-          - "7.2"
+          - "8.3"
+          - "8.4"
+          - "8.5"
 
     steps:
       - name: "Checkout"
@@ -38,7 +39,7 @@ jobs:
           ini-values: memory_limit=-1
 
       - name: "Update Composer platform version"
-        if: ${{ matrix.dependencies != 'locked' && matrix.php-version != '7.1' }}
+        if: ${{ matrix.dependencies != 'locked' && matrix.php-version != '8.3' }}
         shell: bash
         run: "composer config platform.php ${{ matrix.php-version }}"
 
@@ -50,5 +51,13 @@ jobs:
       - name: "Validate Composer dependencies"
         run: "composer validate"
 
-      - name: "Tests"
+      - name: "Run coding style"
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
+        run: "composer code-style:check"
+
+      - name: "Run Rector"
+        if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
+        run: "composer rector:check"
+
+      - name: "Run Tests"
         run: "vendor/bin/phpunit"

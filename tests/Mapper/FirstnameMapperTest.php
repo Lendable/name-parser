@@ -1,17 +1,20 @@
 <?php
 
-namespace TheIconic\NameParser\Mapper;
+declare(strict_types=1);
 
-use TheIconic\NameParser\Part\Salutation;
+namespace Tests\TheIconic\NameParser\Mapper;
+
+use TheIconic\NameParser\Mapper\FirstnameMapper;
 use TheIconic\NameParser\Part\Firstname;
 use TheIconic\NameParser\Part\Lastname;
+use TheIconic\NameParser\Part\Salutation;
 
-class FirstnameMapperTest extends AbstractMapperTest
+class FirstnameMapperTest extends MapperSpec
 {
     /**
      * @return array
      */
-    public function provider()
+    public static function provider()
     {
         return [
             [
@@ -56,8 +59,8 @@ class FirstnameMapperTest extends AbstractMapperTest
                 'expectation' => [
                     new Firstname('Alfonso'),
                     new Salutation('Mr'),
-                ]
-            ]
+                ],
+            ],
         ];
     }
 

@@ -1,16 +1,19 @@
 <?php
 
-namespace TheIconic\NameParser\Mapper;
+declare(strict_types=1);
 
-use TheIconic\NameParser\Part\Salutation;
+namespace Tests\TheIconic\NameParser\Mapper;
+
+use TheIconic\NameParser\Mapper\NicknameMapper;
 use TheIconic\NameParser\Part\Nickname;
+use TheIconic\NameParser\Part\Salutation;
 
-class NicknameMapperTest extends AbstractMapperTest
+class NicknameMapperTest extends MapperSpec
 {
     /**
      * @return array
      */
-    public function provider()
+    public static function provider()
     {
         return [
             [
@@ -117,7 +120,7 @@ class NicknameMapperTest extends AbstractMapperTest
             '(' => ')',
             '<' => '>',
             '"' => '"',
-            '\'' => '\''
+            '\'' => '\'',
         ]);
     }
 }

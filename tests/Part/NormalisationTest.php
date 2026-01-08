@@ -1,18 +1,27 @@
 <?php
 
-namespace TheIconic\NameParser\Part;
+declare(strict_types=1);
+
+namespace Tests\TheIconic\NameParser\Part;
 
 use phpmock\phpunit\PHPMock;
 use PHPUnit\Framework\TestCase;
+use TheIconic\NameParser\Part\Firstname;
+use TheIconic\NameParser\Part\Lastname;
 
 class NormalisationTest extends TestCase
 {
     use PHPMock;
 
+    protected function setUp(): void
+    {
+        self::defineFunctionMock('TheIconic\NameParser\Part', 'function_exists');
+    }
+
     /**
      * make sure we test both with and without mb_string support
      */
-    public function testCamelcasingWorksWithMbString()
+    public function testCamelcasingWorksWithMbString(): void
     {
         $functionExistsMock = $this->getFunctionMock(__NAMESPACE__, 'function_exists');
         $functionExistsMock->expects($this->any())
@@ -36,12 +45,12 @@ class NormalisationTest extends TestCase
 
         $part = new Lastname('nguyễn');
         $this->assertEquals('Nguyễn', $part->normalize());
-   }
+    }
 
     /**
      * make sure we test both with and without mb_string support
      */
-    public function testCamelcasingWorksWithoutMbString()
+    public function testCamelcasingWorksWithoutMbString(): void
     {
         $functionExistsMock = $this->getFunctionMock(__NAMESPACE__, 'function_exists');
         $functionExistsMock->expects($this->any())
