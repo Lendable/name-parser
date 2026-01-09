@@ -1,0 +1,8 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "local>Lendable/renovate-config-public",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)"
+  ]
+}
