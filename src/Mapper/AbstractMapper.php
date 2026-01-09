@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TheIconic\NameParser\Mapper;
 
 use TheIconic\NameParser\Part\AbstractPart;
-use TheIconic\NameParser\Part\Nickname;
 
 abstract class AbstractMapper
 {
@@ -13,14 +14,10 @@ abstract class AbstractMapper
      * @param array $parts - the name parts
      * @return array $parts - the mapped parts
      */
-    abstract public function map(array $parts);
+    abstract public function map(array $parts): array;
 
     /**
      * checks if there are still unmapped parts left before the given position
-     *
-     * @param array $parts
-     * @param $index
-     * @return bool
      */
     protected function hasUnmappedPartsBefore(array $parts, $index): bool
     {
@@ -38,13 +35,11 @@ abstract class AbstractMapper
     }
 
     /**
-     * @param string $type
-     * @param array $parts
      * @return int|bool
      */
     protected function findFirstMapped(string $type, array $parts)
     {
-        $total = count($parts);
+        $total = \count($parts);
 
         for ($i = 0; $i < $total; $i++) {
             if ($parts[$i] instanceof $type) {
@@ -63,6 +58,6 @@ abstract class AbstractMapper
      */
     protected function getKey($word): string
     {
-        return strtolower(str_replace('.', '', $word));
+        return \strtolower(\str_replace('.', '', $word));
     }
 }

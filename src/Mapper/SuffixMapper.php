@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TheIconic\NameParser\Mapper;
 
 use TheIconic\NameParser\Part\AbstractPart;
@@ -30,10 +32,11 @@ class SuffixMapper extends AbstractMapper
     {
         if ($this->isMatchingSinglePart($parts)) {
             $parts[0] = new Suffix($parts[0], $this->suffixes[$this->getKey($parts[0])]);
+
             return $parts;
         }
 
-        $start = count($parts) - 1;
+        $start = \count($parts) - 1;
 
         for ($k = $start; $k > $this->reservedParts - 1; $k--) {
             $part = $parts[$k];
@@ -48,33 +51,25 @@ class SuffixMapper extends AbstractMapper
         return $parts;
     }
 
-    /**
-     * @param $parts
-     * @return bool
-     */
     protected function isMatchingSinglePart($parts): bool
     {
         if (!$this->matchSinglePart) {
             return false;
         }
 
-        if (1 !== count($parts)) {
+        if (\count($parts) !== 1) {
             return false;
         }
 
         return $this->isSuffix($parts[0]);
     }
 
-    /**
-     * @param $part
-     * @return bool
-     */
     protected function isSuffix($part): bool
     {
         if ($part instanceof AbstractPart) {
             return false;
         }
 
-        return (array_key_exists($this->getKey($part), $this->suffixes));
+        return \array_key_exists($this->getKey($part), $this->suffixes);
     }
 }

@@ -1,18 +1,18 @@
 <?php
 
-namespace TheIconic\NameParser\Mapper;
+declare(strict_types=1);
+
+namespace Tests\TheIconic\NameParser\Mapper;
 
 use TheIconic\NameParser\Language\English;
-use TheIconic\NameParser\Part\Lastname;
+use TheIconic\NameParser\Mapper\SuffixMapper;
 use TheIconic\NameParser\Part\Firstname;
+use TheIconic\NameParser\Part\Lastname;
 use TheIconic\NameParser\Part\Suffix;
 
-class SuffixMapperTest extends AbstractMapperTest
+class SuffixMapperTest extends MapperSpec
 {
-    /**
-     * @return array
-     */
-    public function provider()
+    public static function provider(): array
     {
         return [
             [
@@ -31,7 +31,7 @@ class SuffixMapperTest extends AbstractMapperTest
                 [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
-                ]
+                ],
             ],
             [
                 'input' => [
@@ -47,7 +47,7 @@ class SuffixMapperTest extends AbstractMapperTest
                 [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
-                ]
+                ],
             ],
             [
                 'input' => [
@@ -63,7 +63,7 @@ class SuffixMapperTest extends AbstractMapperTest
                 [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
-                ]
+                ],
             ],
             [
                 'input' => [
@@ -79,7 +79,7 @@ class SuffixMapperTest extends AbstractMapperTest
                 [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
-                ]
+                ],
             ],
             [
                 'input' => [
@@ -95,7 +95,7 @@ class SuffixMapperTest extends AbstractMapperTest
                 [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
-                ]
+                ],
             ],
             [
                 'input' => [
@@ -111,7 +111,7 @@ class SuffixMapperTest extends AbstractMapperTest
                 [
                     false,
                     2,
-                ]
+                ],
             ],
             [
                 'input' => [
@@ -125,7 +125,7 @@ class SuffixMapperTest extends AbstractMapperTest
                 [
                     false,
                     2,
-                ]
+                ],
             ],
             [
                 'input' => [
@@ -139,7 +139,7 @@ class SuffixMapperTest extends AbstractMapperTest
                 [
                     false,
                     1,
-                ]
+                ],
             ],
             [
                 'input' => [
@@ -150,12 +150,12 @@ class SuffixMapperTest extends AbstractMapperTest
                 ],
                 [
                     true,
-                ]
+                ],
             ],
         ];
     }
 
-    protected function getMapper($matchSinglePart = false, $reservedParts = 2)
+    protected function getMapper($matchSinglePart = false, $reservedParts = 2): SuffixMapper
     {
         $english = new English();
 

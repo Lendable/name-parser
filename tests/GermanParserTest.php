@@ -1,16 +1,18 @@
 <?php
 
-namespace TheIconic\NameParser;
+declare(strict_types=1);
 
+namespace Tests\TheIconic\NameParser;
+
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use TheIconic\NameParser\Language\German;
+use TheIconic\NameParser\Name;
+use TheIconic\NameParser\Parser;
 
 class GermanParserTest extends TestCase
 {
-    /**
-     * @return array
-     */
-    public function provider()
+    public static function provider(): array
     {
         return [
             [
@@ -18,7 +20,7 @@ class GermanParserTest extends TestCase
                 [
                     'salutation' => 'Herr',
                     'lastname' => 'Schmidt',
-                ]
+                ],
             ],
             [
                 'Frau Maria Lange',
@@ -26,7 +28,7 @@ class GermanParserTest extends TestCase
                     'salutation' => 'Frau',
                     'firstname' => 'Maria',
                     'lastname' => 'Lange',
-                ]
+                ],
             ],
             [
                 'Hr. Juergen von der Lippe',
@@ -34,7 +36,7 @@ class GermanParserTest extends TestCase
                     'salutation' => 'Herr',
                     'firstname' => 'Juergen',
                     'lastname' => 'von der Lippe',
-                ]
+                ],
             ],
             [
                 'Fr. Charlotte von Stein',
@@ -42,21 +44,16 @@ class GermanParserTest extends TestCase
                     'salutation' => 'Frau',
                     'firstname' => 'Charlotte',
                     'lastname' => 'von Stein',
-                ]
+                ],
             ],
         ];
     }
 
-    /**
-     * @dataProvider provider
-     *
-     * @param $input
-     * @param $expectation
-     */
-    public function testParse($input, $expectation)
+    #[DataProvider('provider')]
+    public function testParse($input, $expectation): void
     {
         $parser = new Parser([
-            new German()
+            new German(),
         ]);
         $name = $parser->parse($input);
 

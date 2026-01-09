@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TheIconic\NameParser\Mapper;
 
 use TheIconic\NameParser\Part\AbstractPart;
@@ -10,15 +12,10 @@ use TheIconic\NameParser\Part\Initial;
  */
 class InitialMapper extends AbstractMapper
 {
-    protected $matchLastPart = false;
-
-    private $combinedMax = 2;
-
-    public function __construct(int $combinedMax = 2, bool $matchLastPart = false)
-    {
-        $this->matchLastPart = $matchLastPart;
-        $this->combinedMax = $combinedMax;
-    }
+    public function __construct(
+        private readonly int $combinedMax = 2,
+        protected bool $matchLastPart = false,
+    ) {}
 
     /**
      * map intials in parts array
@@ -28,9 +25,10 @@ class InitialMapper extends AbstractMapper
      */
     public function map(array $parts): array
     {
-        $last = count($parts) - 1;
+        $last = \count($parts) - 1;
+        $counter = \count($parts);
 
-        for ($k = 0; $k < count($parts); $k++) {
+        for ($k = 0; $k < $counter; $k++) {
             $part = $parts[$k];
 
             if ($part instanceof AbstractPart) {
@@ -41,13 +39,14 @@ class InitialMapper extends AbstractMapper
                 continue;
             }
 
-            if (strtoupper($part) === $part) {
-                $stripped = str_replace('.', '', $part);
-                $length = strlen($stripped);
+            if (\strtoupper((string) $part) === $part) {
+                $stripped = \str_replace('.', '', $part);
+                $length = \strlen($stripped);
 
-                if (1 < $length && $length <= $this->combinedMax) {
-                    array_splice($parts, $k, 1, str_split($stripped));
-                    $last = count($parts) - 1;
+                if ($length > 1 && $length <= $this->combinedMax) {
+                    \array_splice($parts, $k, 1, \str_split($stripped));
+                    $counter = \count($parts);
+                    $last = \count($parts) - 1;
                     $part = $parts[$k];
                 }
             }
@@ -60,18 +59,14 @@ class InitialMapper extends AbstractMapper
         return $parts;
     }
 
-    /**
-     * @param string $part
-     * @return bool
-     */
     protected function isInitial(string $part): bool
     {
-        $length = strlen($part);
+        $length = \strlen($part);
 
-        if (1 === $length) {
+        if ($length === 1) {
             return true;
         }
 
-        return ($length === 2 && substr($part, -1) ===  '.');
+        return $length === 2 && \str_ends_with($part, '.');
     }
 }

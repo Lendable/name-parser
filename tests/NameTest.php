@@ -1,8 +1,12 @@
 <?php
 
-namespace TheIconic\NameParser;
+declare(strict_types=1);
+
+namespace Tests\TheIconic\NameParser;
 
 use PHPUnit\Framework\TestCase;
+use TheIconic\NameParser\Name;
+use TheIconic\NameParser\Parser;
 use TheIconic\NameParser\Part\Firstname;
 use TheIconic\NameParser\Part\Initial;
 use TheIconic\NameParser\Part\Lastname;
@@ -14,7 +18,7 @@ use TheIconic\NameParser\Part\Suffix;
 
 class NameTest extends TestCase
 {
-    public function testToString()
+    public function testToString(): void
     {
         $parts = [
             new Salutation('Mr', 'Mr.'),
@@ -32,7 +36,7 @@ class NameTest extends TestCase
         $this->assertSame('Mr. James (Jim) Morgan T. Smith I', (string) $name);
     }
 
-    public function testGetNickname()
+    public function testGetNickname(): void
     {
         $name = new Name([
             new Nickname('Jim'),
@@ -42,7 +46,7 @@ class NameTest extends TestCase
         $this->assertSame('(Jim)', $name->getNickname(true));
     }
 
-    public function testGettingLastnameAndLastnamePrefixSeparately()
+    public function testGettingLastnameAndLastnamePrefixSeparately(): void
     {
         $name = new Name([
             new Firstname('Frank'),

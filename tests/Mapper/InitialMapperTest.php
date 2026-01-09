@@ -1,18 +1,20 @@
 <?php
 
-namespace TheIconic\NameParser\Mapper;
+declare(strict_types=1);
 
-use TheIconic\NameParser\Language\English;
+namespace Tests\TheIconic\NameParser\Mapper;
+
+use TheIconic\NameParser\Mapper\InitialMapper;
 use TheIconic\NameParser\Part\Initial;
-use TheIconic\NameParser\Part\Salutation;
 use TheIconic\NameParser\Part\Lastname;
+use TheIconic\NameParser\Part\Salutation;
 
-class InitialMapperTest extends AbstractMapperTest
+class InitialMapperTest extends MapperSpec
 {
     /**
      * @return array
      */
-    public function provider()
+    public static function provider()
     {
         return [
             [
@@ -54,17 +56,17 @@ class InitialMapperTest extends AbstractMapperTest
             [
                 'input' => [
                     'James',
-                    'B'
+                    'B',
                 ],
                 'expectation' => [
                     'James',
-                    'B'
+                    'B',
                 ],
             ],
             [
                 'input' => [
                     'James',
-                    'B'
+                    'B',
                 ],
                 'expectation' => [
                     'James',
@@ -72,7 +74,7 @@ class InitialMapperTest extends AbstractMapperTest
                 ],
                 'arguments' => [
                     2,
-                    true
+                    true,
                 ],
             ],
             [
@@ -83,8 +85,8 @@ class InitialMapperTest extends AbstractMapperTest
                 'expectation' => [
                     new Initial('J'),
                     new Initial('M'),
-                    'Walker'
-                ]
+                    'Walker',
+                ],
             ],
             [
                 'input' => [
@@ -93,12 +95,12 @@ class InitialMapperTest extends AbstractMapperTest
                 ],
                 'expectation' => [
                     'JM',
-                    'Walker'
+                    'Walker',
                 ],
                 'arguments' => [
-                    1
-                ]
-            ]
+                    1,
+                ],
+            ],
         ];
     }
 

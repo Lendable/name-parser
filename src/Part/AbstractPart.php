@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TheIconic\NameParser\Part;
 
 abstract class AbstractPart
@@ -7,12 +9,10 @@ abstract class AbstractPart
     /**
      * @var string the wrapped value
      */
-    protected $value;
+    protected string $value;
 
     /**
      * constructor allows passing the value to wrap
-     *
-     * @param $value
      */
     public function __construct($value)
     {
@@ -22,13 +22,10 @@ abstract class AbstractPart
     /**
      * set the value to wrap
      * (can take string or part instance)
-     *
-     * @param string|AbstractPart $value
-     * @return $this
      */
-    public function setValue($value): AbstractPart
+    public function setValue(string|self $value): self
     {
-        if ($value instanceof AbstractPart) {
+        if ($value instanceof self) {
             $value = $value->getValue();
         }
 
@@ -39,8 +36,6 @@ abstract class AbstractPart
 
     /**
      * get the wrapped value
-     *
-     * @return string
      */
     public function getValue(): string
     {
@@ -49,8 +44,6 @@ abstract class AbstractPart
 
     /**
      * get the normalized value
-     *
-     * @return string
      */
     public function normalize(): string
     {
@@ -61,30 +54,26 @@ abstract class AbstractPart
      * helper for camelization of values
      * to be used during normalize
      *
-     * @param $word
      * @return mixed
      */
     protected function camelcase($word): string
     {
-        if (preg_match('/\p{L}(\p{Lu}*\p{Ll}\p{Ll}*\p{Lu}|\p{Ll}*\p{Lu}\p{Lu}*\p{Ll})\p{L}*/u', $word)) {
+        if (\preg_match('/\p{L}(\p{Lu}*\p{Ll}\p{Ll}*\p{Lu}|\p{Ll}*\p{Lu}\p{Lu}*\p{Ll})\p{L}*/u', (string) $word)) {
             return $word;
         }
 
-        return preg_replace_callback('/[\p{L}0-9]+/ui', [$this, 'camelcaseReplace'], $word);
+        return \preg_replace_callback('/[\p{L}0-9]+/ui', $this->camelcaseReplace(...), (string) $word);
     }
 
     /**
      * camelcasing callback
-     *
-     * @param $matches
-     * @return string
      */
     protected function camelcaseReplace($matches): string
     {
-        if (function_exists('mb_convert_case')) {
-            return mb_convert_case($matches[0], MB_CASE_TITLE, 'UTF-8');
+        if (\function_exists('mb_convert_case')) {
+            return \mb_convert_case((string) $matches[0], \MB_CASE_TITLE, 'UTF-8');
         }
-        
-        return ucfirst(strtolower($matches[0]));
+
+        return \ucfirst(\strtolower((string) $matches[0]));
     }
 }

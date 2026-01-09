@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TheIconic\NameParser\Mapper;
 
 use TheIconic\NameParser\Part\AbstractPart;
 use TheIconic\NameParser\Part\Firstname;
-use TheIconic\NameParser\Part\Lastname;
 use TheIconic\NameParser\Part\Initial;
+use TheIconic\NameParser\Part\Lastname;
 use TheIconic\NameParser\Part\Salutation;
 
 class FirstnameMapper extends AbstractMapper
@@ -18,13 +20,13 @@ class FirstnameMapper extends AbstractMapper
      */
     public function map(array $parts): array
     {
-        if (count($parts) < 2) {
+        if (\count($parts) < 2) {
             return [$this->handleSinglePart($parts[0])];
         }
 
         $pos = $this->findFirstnamePosition($parts);
 
-        if (null !== $pos) {
+        if ($pos !== null) {
             $parts[$pos] = new Firstname($parts[$pos]);
         }
 
@@ -32,7 +34,6 @@ class FirstnameMapper extends AbstractMapper
     }
 
     /**
-     * @param $part
      * @return Firstname
      */
     protected function handleSinglePart($part): AbstractPart
@@ -44,15 +45,11 @@ class FirstnameMapper extends AbstractMapper
         return new Firstname($part);
     }
 
-    /**
-     * @param array $parts
-     * @return int|null
-     */
     protected function findFirstnamePosition(array $parts): ?int
     {
         $pos = null;
 
-        $length = count($parts);
+        $length = \count($parts);
         $start = $this->getStartIndex($parts);
 
         for ($k = $start; $k < $length; $k++) {
@@ -62,7 +59,7 @@ class FirstnameMapper extends AbstractMapper
                 break;
             }
 
-            if ($part instanceof Initial && null === $pos) {
+            if ($part instanceof Initial && $pos === null) {
                 $pos = $k;
             }
 
@@ -76,19 +73,15 @@ class FirstnameMapper extends AbstractMapper
         return $pos;
     }
 
-    /**
-     * @param array $parts
-     * @return int
-     */
     protected function getStartIndex(array $parts): int
     {
         $index = $this->findFirstMapped(Salutation::class, $parts);
 
-        if (false === $index) {
+        if ($index === false) {
             return 0;
         }
 
-        if ($index === count($parts) - 1) {
+        if ($index === \count($parts) - 1) {
             return 0;
         }
 
