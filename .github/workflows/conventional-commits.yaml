@@ -18,8 +18,15 @@ jobs:
     name: Validate PR title
     runs-on: ubuntu-slim
     steps:
-      - uses: benhodgson87/conventional-pull-request-action@14ff798e4d745c3e3e951f6ef472ff598b9c47a5 # v1
+      - name: "Checkout"
         if: ${{ github.event_name == 'pull_request' }}
+        uses: "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683" # v4
+        with:
+          show-progress: false
+
+      - name: "Check commit"
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: benhodgson87/conventional-pull-request-action@14ff798e4d745c3e3e951f6ef472ff598b9c47a5 # v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
