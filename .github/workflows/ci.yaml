@@ -51,6 +51,9 @@ jobs:
       - name: "Validate Composer dependencies"
         run: "composer validate"
 
+      - name: "Check Composer dependency licenses"
+        run: "composer licenses:check"
+
       - name: "Run coding style"
         if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
         run: "composer code-style:check"
