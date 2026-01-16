@@ -13,11 +13,11 @@
         "php": "^8.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^10.5.60",
         "php-mock/php-mock-phpunit": "^2.14",
         "rector/rector": "^2.3",
-        "php-cs-fixer/shim": "^3.92",
-        "lendable/composer-license-checker": "^1.3"
+        "php-cs-fixer/shim": "^3.92.5",
+        "lendable/composer-license-checker": "^1.4.0"
     },
     "autoload": {
         "psr-4": {
