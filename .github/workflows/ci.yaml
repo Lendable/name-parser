@@ -30,12 +30,12 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8" # v6
+        uses: "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803" # v6
         with:
           show-progress: false
 
       - name: "Install PHP"
-        uses: "shivammathur/setup-php@0f7f1d08e3e32076e51cae65eb0b0c871405b16e" # v2
+        uses: "shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240" # v2
         with:
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
