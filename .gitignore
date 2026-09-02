@@ -2,3 +2,4 @@
 /tests/coverage
 phpunit.xml
 .phpunit.result.cache
+/local/.env
