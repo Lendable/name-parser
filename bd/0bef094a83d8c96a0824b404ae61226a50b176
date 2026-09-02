@@ -1,0 +1,35 @@
+.gitattributes
+  s_554032dd96755b::t_ceb60a8cca1c4c 1-13
+.gitignore
+  s_554032dd96755b::t_e139693d2aa597 5
+Makefile
+  s_554032dd96755b::t_78f93ddb0575e2 1-47
+README.md
+  s_554032dd96755b::t_d1f2cf9a7daa3f 251-275
+local/.env.dist
+  s_554032dd96755b::t_399afa38e0c85c 1-2
+local/Dockerfile
+  s_554032dd96755b::t_d6240c2c95f80e 1-38
+local/docker-compose.yaml
+  s_554032dd96755b::t_fbfa51d5895286 1-15
+local/php_conf.ini
+  s_554032dd96755b::t_ca087d13d11803 1-8
+local/xdebug-entrypoint.sh
+  s_554032dd96755b::t_923a61e6188baf 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "bd0bef094a83d8c96a0824b404ae61226a50b176",
+  "prompts": {},
+  "sessions": {
+    "s_554032dd96755b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f669d65c-b886-4041-a0ac-b7e15ddc1928",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Marcin Michalski <evulmastah@gmail.com>"
+    }
+  }
+}
