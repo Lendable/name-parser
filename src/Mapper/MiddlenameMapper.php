@@ -11,6 +11,7 @@ use TheIconic\NameParser\Part\Middlename;
 
 class MiddlenameMapper extends AbstractMapper
 {
+    /** @var bool */
     protected $mapWithoutLastname = false;
 
     public function __construct(bool $mapWithoutLastname = false)
@@ -21,8 +22,8 @@ class MiddlenameMapper extends AbstractMapper
     /**
      * map middlenames in the parts array
      *
-     * @param array $parts the name parts
-     * @return array the mapped parts
+     * @param array<int, string|AbstractPart> $parts the name parts
+     * @return array<int, string|AbstractPart> the mapped parts
      */
     public function map(array $parts): array
     {
@@ -43,9 +44,10 @@ class MiddlenameMapper extends AbstractMapper
     }
 
     /**
-     * @return mixed
+     * @param array<int, string|AbstractPart> $parts
+     * @return array<int, string|AbstractPart>
      */
-    protected function mapFrom($start, $parts): array
+    protected function mapFrom(int $start, array $parts): array
     {
         // If we don't expect a lastname, include the last part,
         // otherwise skip the last (-1) because it should be a lastname

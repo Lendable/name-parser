@@ -10,7 +10,7 @@ use TheIconic\NameParser\Part\Nickname;
 class NicknameMapper extends AbstractMapper
 {
     /**
-     * @var array
+     * @var array<string, string>
      */
     protected $delimiters = [
         '[' => ']',
@@ -21,6 +21,7 @@ class NicknameMapper extends AbstractMapper
         '\'' => '\'',
     ];
 
+    /** @param array<string, string> $delimiters */
     public function __construct(array $delimiters = [])
     {
         if ($delimiters !== []) {
@@ -31,8 +32,8 @@ class NicknameMapper extends AbstractMapper
     /**
      * map nicknames in the parts array
      *
-     * @param array $parts the name parts
-     * @return array the mapped parts
+     * @param array<int, string|AbstractPart> $parts the name parts
+     * @return array<int, string|AbstractPart> the mapped parts
      */
     public function map(array $parts): array
     {
@@ -47,9 +48,9 @@ class NicknameMapper extends AbstractMapper
                 continue;
             }
 
-            if (\preg_match($regexp, (string) $part, $matches)) {
+            if (\preg_match($regexp, $part, $matches) === 1) {
                 $isEncapsulated = true;
-                $part = \substr((string) $part, 1);
+                $part = \substr($part, 1);
                 $closingDelimiter = $this->delimiters[$matches[1]];
             }
 
@@ -57,9 +58,9 @@ class NicknameMapper extends AbstractMapper
                 continue;
             }
 
-            if ($closingDelimiter === \substr((string) $part, -1)) {
+            if ($closingDelimiter === \substr($part, -1)) {
                 $isEncapsulated = false;
-                $part = \substr((string) $part, 0, -1);
+                $part = \substr($part, 0, -1);
             }
 
             $parts[$k] = new Nickname(\str_replace(['"', '\''], '', $part));

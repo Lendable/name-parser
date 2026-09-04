@@ -9,12 +9,11 @@ use TheIconic\NameParser\Part\Firstname;
 use TheIconic\NameParser\Part\Lastname;
 use TheIconic\NameParser\Part\Salutation;
 
+/** @phpstan-import-type MapperCase from MapperSpec */
 class FirstnameMapperTest extends MapperSpec
 {
-    /**
-     * @return array
-     */
-    public static function provider()
+    /** @return list<MapperCase> */
+    public static function provider(): array
     {
         return [
             [
@@ -64,7 +63,7 @@ class FirstnameMapperTest extends MapperSpec
         ];
     }
 
-    protected function getMapper()
+    protected function getMapper(): FirstnameMapper
     {
         return new FirstnameMapper();
     }

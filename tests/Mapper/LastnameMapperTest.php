@@ -11,12 +11,11 @@ use TheIconic\NameParser\Part\Lastname;
 use TheIconic\NameParser\Part\LastnamePrefix;
 use TheIconic\NameParser\Part\Salutation;
 
+/** @phpstan-import-type MapperCase from MapperSpec */
 class LastnameMapperTest extends MapperSpec
 {
-    /**
-     * @return array
-     */
-    public static function provider()
+    /** @return list<MapperCase> */
+    public static function provider(): array
     {
         return [
             [
@@ -121,7 +120,7 @@ class LastnameMapperTest extends MapperSpec
         ];
     }
 
-    protected function getMapper($matchSingle = false)
+    protected function getMapper(bool $matchSingle = false): LastnameMapper
     {
         $english = new English();
 

@@ -6,6 +6,7 @@ namespace TheIconic\NameParser\Part;
 
 class LastnamePrefix extends Lastname
 {
+    /** @var string */
     protected $normalized = '';
 
     public function __construct(string $value, ?string $normalized = null)

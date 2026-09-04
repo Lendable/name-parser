@@ -9,8 +9,13 @@ use TheIconic\NameParser\Part\Salutation;
 
 class SalutationMapper extends AbstractMapper
 {
+    /** @var array<string, string> */
     protected $salutations = [];
 
+    /**
+     * @param array<string, string> $salutations
+     * @param int $maxIndex
+     */
     public function __construct(array $salutations, protected $maxIndex = 0)
     {
         $this->salutations = $salutations;
@@ -19,8 +24,8 @@ class SalutationMapper extends AbstractMapper
     /**
      * map salutations in the parts array
      *
-     * @param array $parts the name parts
-     * @return array the mapped parts
+     * @param array<int, string|AbstractPart> $parts the name parts
+     * @return array<int, string|AbstractPart> the mapped parts
      */
     public function map(array $parts): array
     {
@@ -41,17 +46,23 @@ class SalutationMapper extends AbstractMapper
      * We pass the full parts array and the current position to allow
      * not only single-word matches but also combined matches with
      * subsequent words (parts).
+     *
+     * @param array<int, string|AbstractPart> $parts
+     * @return array<int, string|AbstractPart>
      */
     protected function substituteWithSalutation(array $parts, int $start): array
     {
-        if ($this->isSalutation($parts[$start])) {
-            $parts[$start] = new Salutation($parts[$start], $this->salutations[$this->getKey($parts[$start])]);
+        /** @var string $part */
+        $part = $parts[$start];
+
+        if ($this->isSalutation($part)) {
+            $parts[$start] = new Salutation($part, $this->salutations[$this->getKey($part)]);
 
             return $parts;
         }
 
         foreach ($this->salutations as $key => $salutation) {
-            $keys = \explode(' ', (string) $key);
+            $keys = \explode(' ', $key);
             $length = \count($keys);
 
             $subset = \array_slice($parts, $start, $length);
@@ -70,12 +81,19 @@ class SalutationMapper extends AbstractMapper
      * check if the given subset matches the given keys entry by entry,
      * which means word by word, except that we first need to key-ify
      * the subset words
+     *
+     * @param list<string> $keys
+     * @param array<int, string|AbstractPart> $subset
+     * @phpstan-assert-if-true =list<string> $subset
      */
     private function isMatchingSubset(array $keys, array $subset): bool
     {
         $counter = \count($subset);
         for ($i = 0; $i < $counter; $i++) {
-            if ($this->getKey($subset[$i]) !== $keys[$i]) {
+            /** @var string $part */
+            $part = $subset[$i];
+
+            if ($this->getKey($part) !== $keys[$i]) {
                 return false;
             }
         }

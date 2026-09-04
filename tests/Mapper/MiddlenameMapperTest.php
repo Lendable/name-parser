@@ -9,12 +9,11 @@ use TheIconic\NameParser\Part\Firstname;
 use TheIconic\NameParser\Part\Lastname;
 use TheIconic\NameParser\Part\Middlename;
 
+/** @phpstan-import-type MapperCase from MapperSpec */
 class MiddlenameMapperTest extends MapperSpec
 {
-    /**
-     * @return array
-     */
-    public static function provider()
+    /** @return list<MapperCase> */
+    public static function provider(): array
     {
         return [
             [
@@ -95,7 +94,7 @@ class MiddlenameMapperTest extends MapperSpec
         ];
     }
 
-    protected function getMapper($mapWithoutLastname = false)
+    protected function getMapper(bool $mapWithoutLastname = false): MiddlenameMapper
     {
         return new MiddlenameMapper($mapWithoutLastname);
     }

@@ -17,16 +17,20 @@ class Parser
 {
     protected string $whitespace = " \r\n\t";
 
+    /** @var list<Mapper\AbstractMapper> */
     protected array $mappers = [];
 
+    /** @var list<LanguageInterface> */
     protected array $languages = [];
 
+    /** @var array<string, string> */
     protected array $nicknameDelimiters = [];
 
     protected int $maxSalutationIndex = 0;
 
     protected int $maxCombinedInitials = 2;
 
+    /** @param list<LanguageInterface> $languages */
     public function __construct(array $languages = [])
     {
         if ($languages === []) {
@@ -65,6 +69,10 @@ class Parser
 
     /**
      * handles split-parsing of comma-separated name parts
+     *
+     * @param string $first
+     * @param string $second
+     * @param string $third
      */
     protected function parseSplitName($first, $second, $third): Name
     {
@@ -121,6 +129,8 @@ class Parser
 
     /**
      * get the mappers for this parser
+     *
+     * @return list<Mapper\AbstractMapper>
      */
     public function getMappers(): array
     {
@@ -141,6 +151,8 @@ class Parser
 
     /**
      * set the mappers for this parser
+     *
+     * @param list<Mapper\AbstractMapper> $mappers
      */
     public function setMappers(array $mappers): Parser
     {
@@ -158,7 +170,13 @@ class Parser
 
         $name = \trim($name);
 
-        return \preg_replace('/['.\preg_quote($whitespace).']+/', ' ', $name);
+        $normalized = \preg_replace('/['.\preg_quote($whitespace, '/').']+/', ' ', $name);
+
+        if ($normalized === null) {
+            throw new \RuntimeException('Failed to normalize name: '.\preg_last_error_msg());
+        }
+
+        return $normalized;
     }
 
     /**
@@ -171,6 +189,8 @@ class Parser
 
     /**
      * set the string of characters that are supposed to be treated as whitespace
+     *
+     * @param string $whitespace
      */
     public function setWhitespace($whitespace): self
     {
@@ -179,6 +199,7 @@ class Parser
         return $this;
     }
 
+    /** @return array<string, string> */
     protected function getPrefixes(): array
     {
         $prefixes = [];
@@ -191,6 +212,7 @@ class Parser
         return $prefixes;
     }
 
+    /** @return array<string, string> */
     protected function getSuffixes(): array
     {
         $suffixes = [];
@@ -203,6 +225,7 @@ class Parser
         return $suffixes;
     }
 
+    /** @return array<string, string> */
     protected function getSalutations(): array
     {
         $salutations = [];
@@ -215,11 +238,13 @@ class Parser
         return $salutations;
     }
 
+    /** @return array<string, string> */
     public function getNicknameDelimiters(): array
     {
         return $this->nicknameDelimiters;
     }
 
+    /** @param array<string, string> $nicknameDelimiters */
     public function setNicknameDelimiters(array $nicknameDelimiters): Parser
     {
         $this->nicknameDelimiters = $nicknameDelimiters;

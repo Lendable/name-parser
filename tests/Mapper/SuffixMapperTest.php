@@ -10,8 +10,10 @@ use TheIconic\NameParser\Part\Firstname;
 use TheIconic\NameParser\Part\Lastname;
 use TheIconic\NameParser\Part\Suffix;
 
+/** @phpstan-import-type MapperCase from MapperSpec */
 class SuffixMapperTest extends MapperSpec
 {
+    /** @return list<MapperCase> */
     public static function provider(): array
     {
         return [
@@ -155,7 +157,7 @@ class SuffixMapperTest extends MapperSpec
         ];
     }
 
-    protected function getMapper($matchSinglePart = false, $reservedParts = 2): SuffixMapper
+    protected function getMapper(bool $matchSinglePart = false, int $reservedParts = 2): SuffixMapper
     {
         $english = new English();
 

@@ -60,6 +60,10 @@ jobs:
         if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
         run: "composer code-style:check"
 
+      - name: "Run PHPStan"
+        if: ${{ matrix.dependencies == 'locked' }}
+        run: "composer phpstan"
+
       - name: "Run Rector"
         if: ${{ matrix.dependencies == 'locked' && matrix.php-version == '8.3' }}
         run: "composer rector:check"
