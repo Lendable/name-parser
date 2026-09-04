@@ -25,12 +25,16 @@
     },
     "autoload": {
         "psr-4": {
-            "TheIconic\\NameParser\\": ["src/"]
+            "TheIconic\\NameParser\\": [
+                "src/"
+            ]
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\TheIconic\\NameParser\\": ["tests/"]
+            "Tests\\TheIconic\\NameParser\\": [
+                "tests/"
+            ]
         }
     },
     "config": {
