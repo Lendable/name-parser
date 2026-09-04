@@ -11,15 +11,17 @@ abstract class AbstractMapper
     /**
      * implements the mapping of parts
      *
-     * @param array $parts - the name parts
-     * @return array $parts - the mapped parts
+     * @param array<int, string|AbstractPart> $parts the name parts
+     * @return array<int, string|AbstractPart> the mapped parts
      */
     abstract public function map(array $parts): array;
 
     /**
      * checks if there are still unmapped parts left before the given position
+     *
+     * @param array<int, string|AbstractPart> $parts
      */
-    protected function hasUnmappedPartsBefore(array $parts, $index): bool
+    protected function hasUnmappedPartsBefore(array $parts, int $index): bool
     {
         foreach ($parts as $k => $part) {
             if ($k === $index) {
@@ -35,7 +37,9 @@ abstract class AbstractMapper
     }
 
     /**
-     * @return int|bool
+     * @param class-string<AbstractPart> $type
+     * @param array<int, string|AbstractPart> $parts
+     * @return int|false
      */
     protected function findFirstMapped(string $type, array $parts)
     {

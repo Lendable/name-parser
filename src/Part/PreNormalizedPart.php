@@ -6,6 +6,7 @@ namespace TheIconic\NameParser\Part;
 
 abstract class PreNormalizedPart extends AbstractPart
 {
+    /** @var string */
     protected $normalized = '';
 
     public function __construct(string $value, ?string $normalized = null)

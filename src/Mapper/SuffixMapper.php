@@ -9,12 +9,16 @@ use TheIconic\NameParser\Part\Suffix;
 
 class SuffixMapper extends AbstractMapper
 {
+    /** @var array<string, string> */
     protected $suffixes = [];
 
+    /** @var bool */
     protected $matchSinglePart = false;
 
+    /** @var int */
     protected $reservedParts = 2;
 
+    /** @param array<string, string> $suffixes */
     public function __construct(array $suffixes, bool $matchSinglePart = false, int $reservedParts = 2)
     {
         $this->suffixes = $suffixes;
@@ -25,8 +29,8 @@ class SuffixMapper extends AbstractMapper
     /**
      * map suffixes in the parts array
      *
-     * @param array $parts the name parts
-     * @return array the mapped parts
+     * @param array<int, string|AbstractPart> $parts the name parts
+     * @return array<int, string|AbstractPart> the mapped parts
      */
     public function map(array $parts): array
     {
@@ -51,7 +55,11 @@ class SuffixMapper extends AbstractMapper
         return $parts;
     }
 
-    protected function isMatchingSinglePart($parts): bool
+    /**
+     * @param array<int, string|AbstractPart> $parts
+     * @phpstan-assert-if-true =array{0: string} $parts
+     */
+    protected function isMatchingSinglePart(array $parts): bool
     {
         if (!$this->matchSinglePart) {
             return false;
@@ -64,6 +72,10 @@ class SuffixMapper extends AbstractMapper
         return $this->isSuffix($parts[0]);
     }
 
+    /**
+     * @param string|AbstractPart $part
+     * @phpstan-assert-if-true =string $part
+     */
     protected function isSuffix($part): bool
     {
         if ($part instanceof AbstractPart) {

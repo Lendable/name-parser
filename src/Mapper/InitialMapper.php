@@ -20,8 +20,8 @@ class InitialMapper extends AbstractMapper
     /**
      * map intials in parts array
      *
-     * @param array $parts the name parts
-     * @return array the mapped parts
+     * @param array<int, string|AbstractPart> $parts the name parts
+     * @return array<int, string|AbstractPart> the mapped parts
      */
     public function map(array $parts): array
     {
@@ -39,7 +39,7 @@ class InitialMapper extends AbstractMapper
                 continue;
             }
 
-            if (\strtoupper((string) $part) === $part) {
+            if (\strtoupper($part) === $part) {
                 $stripped = \str_replace('.', '', $part);
                 $length = \strlen($stripped);
 
@@ -47,6 +47,7 @@ class InitialMapper extends AbstractMapper
                     \array_splice($parts, $k, 1, \str_split($stripped));
                     $counter = \count($parts);
                     $last = \count($parts) - 1;
+                    /** @var string $part */
                     $part = $parts[$k];
                 }
             }

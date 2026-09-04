@@ -11,12 +11,14 @@ class Name implements \Stringable
     private const string PARTS_NAMESPACE = 'TheIconic\NameParser\Part';
 
     /**
-     * @var array the parts that make up this name
+     * @var array<int, string|AbstractPart> the parts that make up this name
      */
     protected array $parts = [];
 
     /**
      * constructor takes the array of parts this name consists of
+     *
+     * @param array<int, string|AbstractPart>|null $parts
      */
     public function __construct(?array $parts = null)
     {
@@ -33,6 +35,7 @@ class Name implements \Stringable
     /**
      * set the parts this name consists of
      *
+     * @param array<int, string|AbstractPart> $parts
      * @return $this
      */
     public function setParts(array $parts): self
@@ -44,33 +47,29 @@ class Name implements \Stringable
 
     /**
      * get the parts this name consists of
+     *
+     * @return array<int, string|AbstractPart>
      */
     public function getParts(): array
     {
         return $this->parts;
     }
 
+    /** @return array<string, string> */
     public function getAll(bool $format = false): array
     {
-        $results = [];
-        $keys = [
-            'salutation' => [],
-            'firstname' => [],
-            'nickname' => [$format],
-            'middlename' => [],
-            'initials' => [],
-            'lastname' => [],
-            'suffix' => [],
-        ];
-
-        foreach ($keys as $key => $args) {
-            $method = \sprintf('get%s', \ucfirst($key));
-            if ($value = \call_user_func_array([$this, $method], $args)) {
-                $results[$key] = $value;
-            }
-        }
-
-        return $results;
+        return \array_filter(
+            [
+                'salutation' => $this->getSalutation(),
+                'firstname' => $this->getFirstname(),
+                'nickname' => $this->getNickname($format),
+                'middlename' => $this->getMiddlename(),
+                'initials' => $this->getInitials(),
+                'lastname' => $this->getLastname(),
+                'suffix' => $this->getSuffix(),
+            ],
+            static fn(string $value): bool => $value !== '' && $value !== '0',
+        );
     }
 
     /**

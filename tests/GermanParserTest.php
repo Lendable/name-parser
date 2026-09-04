@@ -7,11 +7,11 @@ namespace Tests\TheIconic\NameParser;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use TheIconic\NameParser\Language\German;
-use TheIconic\NameParser\Name;
 use TheIconic\NameParser\Parser;
 
 class GermanParserTest extends TestCase
 {
+    /** @return list<array{string, array<string, string>}> */
     public static function provider(): array
     {
         return [
@@ -49,15 +49,13 @@ class GermanParserTest extends TestCase
         ];
     }
 
+    /** @param array<string, string> $expectation */
     #[DataProvider('provider')]
-    public function testParse($input, $expectation): void
+    public function testParse(string $input, array $expectation): void
     {
         $parser = new Parser([
             new German(),
         ]);
-        $name = $parser->parse($input);
-
-        $this->assertInstanceOf(Name::class, $name);
-        $this->assertEquals($expectation, $name->getAll());
+        $this->assertEquals($expectation, $parser->parse($input)->getAll());
     }
 }
