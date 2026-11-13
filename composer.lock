@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "638d8a8a39571415dd1f70ca49b7ad8b",
+    "content-hash": "e8d8020fefe527bf7bca2ed459c88d4b",
     "packages": [],
     "packages-dev": [
         {
@@ -621,7 +621,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-24T11:36:00+00:00"
+            "time": "2026-10-24T11:36:00+00:00",
+            "published-time": "2026-10-24T11:36:12+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -3065,7 +3066,8 @@
     },
     "platform-dev": {},
     "platform-overrides": {
+        "composer": "2.11",
         "php": "8.3"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
