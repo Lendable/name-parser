@@ -1,0 +1,9 @@
+autofix:
+  single_pr_for_repo: false
+  pr_config:
+    branch_prefix: "chore/aikido-"
+    title_prefix: "chore(deps): "
+    commit_prefix: "chore(deps): "
+    labels: "security,aikido-autofix,$AUTOFIX_TYPE"
+    draft_pr: false
+    auto_merge: true
