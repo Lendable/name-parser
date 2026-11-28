@@ -16,8 +16,7 @@ use TheIconic\NameParser\Part\AbstractPart;
  * @phpstan-type MapperCase array{
  *     input: Parts,
  *     expectation: Parts,
- *     arguments?: MapperArguments,
- *     0?: MapperArguments
+ *     arguments?: MapperArguments
  * }
  */
 abstract class MapperSpec extends TestCase
