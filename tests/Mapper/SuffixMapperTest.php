@@ -30,7 +30,7 @@ class SuffixMapperTest extends MapperSpec
                     'Blueberg',
                     new Suffix('PhD'),
                 ],
-                [
+                'arguments' => [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
                 ],
@@ -46,7 +46,7 @@ class SuffixMapperTest extends MapperSpec
                     'Alfred',
                     new Suffix('III'),
                 ],
-                [
+                'arguments' => [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
                 ],
@@ -62,7 +62,7 @@ class SuffixMapperTest extends MapperSpec
                     new Lastname('Smith'),
                     new Suffix('Senior'),
                 ],
-                [
+                'arguments' => [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
                 ],
@@ -78,7 +78,7 @@ class SuffixMapperTest extends MapperSpec
                     new Firstname('James'),
                     'Norrington',
                 ],
-                [
+                'arguments' => [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
                 ],
@@ -94,7 +94,7 @@ class SuffixMapperTest extends MapperSpec
                     new Firstname('James'),
                     new Lastname('Norrington'),
                 ],
-                [
+                'arguments' => [
                     'matchSinglePart' => false,
                     'reservedParts' => 2,
                 ],
@@ -110,7 +110,7 @@ class SuffixMapperTest extends MapperSpec
                     'Norrington',
                     new Suffix('Senior'),
                 ],
-                [
+                'arguments' => [
                     false,
                     2,
                 ],
@@ -124,7 +124,7 @@ class SuffixMapperTest extends MapperSpec
                     'Norrington',
                     'Senior',
                 ],
-                [
+                'arguments' => [
                     false,
                     2,
                 ],
@@ -138,7 +138,7 @@ class SuffixMapperTest extends MapperSpec
                     new Lastname('Norrington'),
                     new Suffix('Senior'),
                 ],
-                [
+                'arguments' => [
                     false,
                     1,
                 ],
@@ -150,7 +150,7 @@ class SuffixMapperTest extends MapperSpec
                 'expectation' => [
                     new Suffix('Senior'),
                 ],
-                [
+                'arguments' => [
                     true,
                 ],
             ],
