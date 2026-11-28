@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-$finder = (new PhpCsFixer\Finder())
+$finder = new PhpCsFixer\Finder()
     ->in(['src', 'tests']);
 
-return (new PhpCsFixer\Config())
+return new PhpCsFixer\Config()
     ->setRules([
         '@PER-CS2x0' => true,
         '@PER-CS2x0:risky' => true,
-        '@PHP8x3Migration' => true,
+        '@PHP8x4Migration' => true,
         '@DoctrineAnnotation' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,
