@@ -1,0 +1,22 @@
+name: Sloth
+
+on:
+  pull_request:
+  merge_group:
+
+permissions:
+  contents: read
+  checks: read
+  actions: read
+
+jobs:
+  sloth:
+    name: sloth
+    runs-on: ubuntu-slim
+    steps:
+      - name: "Sloth"
+        uses: "Lendable/sloth@a1047af3ec3bc2f2942b239310d838ad344f055d" # v1.2.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ignored: |
+            Validate PR title
