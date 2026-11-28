@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^8.3"
+        "php": "^8.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5.67",
@@ -25,18 +25,22 @@
     },
     "autoload": {
         "psr-4": {
-            "TheIconic\\NameParser\\": ["src/"]
+            "TheIconic\\NameParser\\": [
+                "src/"
+            ]
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\TheIconic\\NameParser\\": ["tests/"]
+            "Tests\\TheIconic\\NameParser\\": [
+                "tests/"
+            ]
         }
     },
     "config": {
         "platform": {
             "composer": "2.11",
-            "php": "8.3"
+            "php": "8.4.1"
         }
     },
     "scripts": {
