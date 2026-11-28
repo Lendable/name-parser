@@ -5,8 +5,6 @@
 
 ### Features
 
-* Require PHP 8.3 ([6febbfd](https://github.com/Lendable/name-parser/commit/6febbfd238ca8f752d87dc1c80af8e7147c75e6e))
-* Require PHP 8.3 ([e5533f7](https://github.com/Lendable/name-parser/commit/e5533f718b1cdcbce522a40b364ca0185b87da89))
 * Require PHP 8.4 ([#38](https://github.com/Lendable/name-parser/issues/38)) ([4005e0e](https://github.com/Lendable/name-parser/commit/4005e0ef07838292e732ebce24c4514e66b04a64))
 
 
