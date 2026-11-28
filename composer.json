@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^8.3"
+        "php": "^8.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5.64",
@@ -36,7 +36,7 @@
     "config": {
         "platform": {
             "composer": "2.11",
-            "php": "8.3"
+            "php": "8.4.1"
         }
     },
     "scripts": {
